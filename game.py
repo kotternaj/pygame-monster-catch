@@ -10,12 +10,29 @@ class Hero(object):
         self.screen = screen
     def render(self):
         self.screen.blit(self.image, [self.x, self.y])
-
-
+class Goblin(object):
+    def __init__(self, screen, img):
+        self.image = img
+        self.x = 300
+        self.y = 300
+        self.speed = 9
+        self.screen = screen
+    def render(self):
+        self.screen.blit(self.image, [self.x, self.y])
+    
+class Monster(object):
+    def __init__(self, screen, img):
+        self.image = img
+        self.x = 200
+        self.y = 200
+        self.speed = 9
+        self.screen = screen
+    def render(self):
+        self.screen.blit(self.image, [self.x,self.y])
 
 def main():
-    width = 512
-    height = 480
+    width = 800
+    height = 600
     blue_color = (97, 159, 182)
 
     pygame.init()
@@ -26,9 +43,12 @@ def main():
     goblin_img = pygame.image.load('images/goblin.png')
     monster_img = pygame.image.load('images/monster.png')
     background_image = pygame.image.load('images/background.png')
+    background_image = pygame.transform.scale(background_image,(800,600))
+    music = pygame.mixer.music.load("sounds/music.wav")
+    pygame.mixer.music.play(1, 0.0)
     hero = Hero(screen, hero_img)
-
-
+    goblin = Goblin(screen, goblin_img)
+    monster = Monster(screen, monster_img)
 
     # Game initialization
 
@@ -50,7 +70,8 @@ def main():
 
         # Game display
         hero.render()
-
+        goblin.render()
+        monster.render()
            
         
         pygame.display.update()
