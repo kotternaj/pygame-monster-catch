@@ -49,6 +49,7 @@ def main():
     hero = Hero(screen, hero_img)
     goblin = Goblin(screen, goblin_img)
     monster = Monster(screen, monster_img)
+    
 
     # Game initialization
 
