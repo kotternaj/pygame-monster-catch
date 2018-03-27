@@ -1,34 +1,34 @@
 import pygame
+import random
 
-class Hero(object):
-    def __init__(self, screen, img):
-
-        self.image = img
-        self.x = 100
-        self.y = 100
-        self.speed = 10
-        self.screen = screen
-    def render(self):
-        self.screen.blit(self.image, [self.x, self.y])
-class Goblin(object):
-    def __init__(self, screen, img):
-        self.image = img
-        self.x = 300
-        self.y = 300
-        self.speed = 9
-        self.screen = screen
-    def render(self):
-        self.screen.blit(self.image, [self.x, self.y])
+class Character(object):
+    def __init__(self):
+        self.speed_x = 0
+        self.speed_y = 0
     
-class Monster(object):
-    def __init__(self, screen, img):
-        self.image = img
-        self.x = 200
-        self.y = 200
-        self.speed = 9
-        self.screen = screen
-    def render(self):
-        self.screen.blit(self.image, [self.x,self.y])
+    def draw(self, screen):
+        screen.blit(self.image, (self.x, self.y))
+
+class Hero(Character):
+    def __init__(self):
+        super(Hero, self).__init__()
+        self.image = pygame.image.load('images/hero.png')
+        self.x = 240
+        self.y = 224
+        self.speed = 2
+
+    def update(self):
+        self.x += self.speed_x
+        self.y += self.speed_y
+
+class Monster(Character):
+    def __init__(self):
+        super(Monster, self).__init__()
+        self.image = pygame.image.load('images/monster.png')
+        self.x = 240
+        self.y = 224
+        self.speed = 2
+        
 
 def main():
     width = 800
@@ -40,15 +40,15 @@ def main():
     pygame.display.set_caption('My Game')
     clock = pygame.time.Clock()
     hero_img = pygame.image.load('images/hero.png')
-    goblin_img = pygame.image.load('images/goblin.png')
+    
     monster_img = pygame.image.load('images/monster.png')
     background_image = pygame.image.load('images/background.png')
     background_image = pygame.transform.scale(background_image,(800,600))
     music = pygame.mixer.music.load("sounds/music.wav")
     pygame.mixer.music.play(1, 0.0)
-    hero = Hero(screen, hero_img)
-    goblin = Goblin(screen, goblin_img)
-    monster = Monster(screen, monster_img)
+    hero = Hero()
+    
+    monster = Monster()
     
 
     # Game initialization
@@ -70,12 +70,10 @@ def main():
         
 
         # Game display
-        hero.render()
-        goblin.render()
-        monster.render()
-           
-        
+        hero.draw(screen)        
+        monster.draw(screen)       
         pygame.display.update()
+        
         clock.tick(60)
 
     pygame.quit()
