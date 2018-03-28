@@ -78,7 +78,17 @@ def main():
                     hero.speed_x = -hero.base_speed
                 elif event.key == pygame.K_RIGHT:
                     hero.speed_x = hero.base_speed
-                
+
+        # Boundary warping
+        if monster.x > 472:
+            monster.x = 20
+        if monster.x < 20:
+            monster.x = 472
+        if monster.y > 450:
+            monster.y = 20
+        if monster.y < 20:
+            monster.y = 450
+                    
         # Update position of hero every loop
         hero.update()
 
@@ -90,8 +100,46 @@ def main():
         hero.draw(screen)        
         monster.draw(screen)       
         pygame.display.update()
-
         clock.tick(60)
+
+        #Movement of monster
+        clock.tick(60)
+        timer_count = timer_count + 1
+        monster.x += monster.speed_x
+        monster.y += monster.speed_y
+
+        #Changes monster direction randomly every 2 secs
+        if timer_count >= 120:
+            timer_count = 0
+            random_direction = random.randint(0, 7)
+
+            if random_direction == 0:
+                monster.speed_x = -base_speed
+                monster.speed_y = 0
+
+            elif random_direction == 1:
+                monster.speed_x = monster.base_speed
+                monster.speed_y = 0
+            elif random_direction == 2:
+                monster.speed_x = monster.base_speed
+                monster.speed_y = 0
+            elif random_direction == 3:
+                monster.speed_x = monster.base_speed
+                monster.speed_y = 0
+            elif random_direction == 4:
+                monster.speed_y = monster.base_speed
+                monster.speed_x = monster.base_speed
+            elif random_direction == 5:
+                monster.speed_y = -monster.base_speed
+                monster.speed_x = monster.base_speed
+            elif random_direction == 6:
+                monster.speed_y = -monster.base_speed
+                monster.speed_x = monster.base_speed
+            elif random_direction == 7:
+                monster.speed_y = -monster.base_speed
+                monster.speed_x = -monster.base_speed
+            
+
 
     pygame.quit()
 
