@@ -47,6 +47,12 @@ def main():
     stop_game = False
     timer_count = 119
 
+    # When hero and monster collide
+    def collide():
+        print "You caught the monster!"
+        screen.blit(background_image, (0, 0))
+        hero.draw(screen)
+
     while not stop_game:
         for event in pygame.event.get():
             
@@ -88,7 +94,7 @@ def main():
             monster.y = 20
         if monster.y < 20:
             monster.y = 450
-                    
+
         # Update position of hero every loop
         hero.update()
 
@@ -114,7 +120,7 @@ def main():
             random_direction = random.randint(0, 7)
 
             if random_direction == 0:
-                monster.speed_x = -base_speed
+                monster.speed_x = -monster.base_speed
                 monster.speed_y = 0
 
             elif random_direction == 1:
@@ -139,6 +145,17 @@ def main():
                 monster.speed_y = -monster.base_speed
                 monster.speed_x = -monster.base_speed
             
+        # Hero collision
+        if hero.x + 20 < monster.x:
+            pass
+        elif monster.x + 20 < hero.x:
+            pass
+        elif hero.y + 20 < monster.y:
+            pass
+        elif monster.y + 20 < hero.y:
+            pass
+        else:
+            collide()
 
 
     pygame.quit()
