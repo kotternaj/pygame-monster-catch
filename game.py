@@ -31,11 +31,9 @@ class Monster(Character):
         
 
 def main():
-    width = 512
-    height = 480
-    blue_color = (97, 159, 182)
+    size = width, height = 512, 480   
     pygame.init()
-    screen = pygame.display.set_mode((width, height))
+    screen = pygame.display.set_mode(size)
     background_image = pygame.image.load('images/background.png').convert_alpha()
     pygame.display.set_caption('Monster Catch!')
     clock = pygame.time.Clock()
@@ -85,7 +83,7 @@ def main():
                 elif event.key == pygame.K_RIGHT:
                     hero.speed_x = hero.base_speed
 
-        # Boundary warping
+        # Boundary warping 
         if monster.x > 472:
             monster.x = 20
         if monster.x < 20:
@@ -94,7 +92,16 @@ def main():
             monster.y = 20
         if monster.y < 20:
             monster.y = 450
-
+        
+        if hero.x > 472:
+            hero.x = 20
+        if hero.x < 20:
+            hero.x = 472
+        if hero.y > 450:
+            hero.y = 20
+        if hero.y < 20:
+            hero.y = 450
+            
         # Update position of hero every loop
         hero.update()
 
