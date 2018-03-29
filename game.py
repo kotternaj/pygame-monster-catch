@@ -15,7 +15,7 @@ class Hero(Character):
         self.image = pygame.image.load('images/hero.png')
         self.x = 240
         self.y = 224
-        self.base_speed = 2
+        self.base_speed = 4
 
     def update(self):
         self.x += self.speed_x
@@ -37,19 +37,25 @@ def main():
     background_image = pygame.image.load('images/background.png').convert_alpha()
     pygame.display.set_caption('Monster Catch!')
     clock = pygame.time.Clock()
+    win_sound = pygame.mixer.Sound('sounds/win.wav')
           
+    # Music
+    pygame.mixer.music.load('sounds/music.wav')
+    pygame.mixer.music.play(-1)
 
     # Game initialization
     hero = Hero()    
     monster = Monster()
     stop_game = False
     timer_count = 119
-
+    
     # When hero and monster collide
     def collide():
         print "You caught the monster!"
         screen.blit(background_image, (0, 0))
         hero.draw(screen)
+        pygame.mixer.Sound.play(win_sound)
+        pygame.mixer.music.stop()
 
     while not stop_game:
         for event in pygame.event.get():
