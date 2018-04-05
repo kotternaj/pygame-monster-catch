@@ -1,5 +1,8 @@
-import pygame
+import pygame, sys
+from pygame.locals import *
 import random
+import time
+
 
 class Character(object):
     def __init__(self):
@@ -51,11 +54,15 @@ def main():
     
     # When hero and monster collide
     def collide():
-        print "You caught the monster!"
+        # print "You caught the monster!"
         screen.blit(background_image, (0, 0))
         hero.draw(screen)
         pygame.mixer.Sound.play(win_sound)
-        pygame.mixer.music.stop()
+        # pygame.mixer.music.stop()
+        sys_font = pygame.font.SysFont('none', 40)
+        rendered = sys_font.render('You caught the monster!',0,(80,200,80))
+        screen.blit(rendered, (30,100))
+        pygame.display.update()
 
     while not stop_game:
         for event in pygame.event.get():
